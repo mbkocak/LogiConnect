@@ -1,0 +1,139 @@
+﻿@using MvcStock.Models.ViewModel
+@model IEnumerable<DriverAndTruckViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+@using (Html.BeginForm("Index", "Trucks", FormMethod.Post))
+{
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <div class="row ">
+                    <div class="col-md-3">
+                        <label for="TruckCapacity">Truck Capacity:</label>
+                        @Html.TextBox("TruckCapacity", null, new { @class = "form-control newInput", id = "TruckCapacity" })
+                    </div>
+                    <div class="col-md-3">
+                        <label for="HighwayFee">Highway Fee:</label>
+                        @Html.TextBox("HighwayFee", null, new { @class = "form-control newInput", id = "HighwayFee" })
+                    </div>
+                    <div class="col-md-3">
+                        <label for="DriverName">Driver Name:</label>
+                        @Html.TextBox("DriverName", null, new { @class = "form-control newInput", id = "DriverName" })
+                    </div>
+                    <div class="col-md-3">
+                        <label for="DriverSurname">Driver Surname:</label>
+                        @Html.TextBox("DriverSurname", null, new { @class = "form-control newInput", id = "DriverSurname" })
+                    </div>
+
+                </div>
+
+                
+                    <div class="row">
+                        <div class="col-md-4">
+                        <input type="submit" value="Search" class="newBtn" style="margin-left: -2px;" />
+
+                        </div>
+                    </div>
+
+                <div class="msgbox">
+                    @if (TempData["DeleteMessage"] != null)
+                    {
+                        <div class="msgbox-update">
+                            <strong>Success! Truck deleted!</strong> @TempData["DeleteMessage"]
+                        </div>
+                    }
+
+                    <div class="msgbox">
+                        @if (TempData["UpdateMessage"] != null)
+                        {
+                            <div class="msgbox-update">
+                                <strong>
+                                    Success! Updated successfully!
+                                </strong>
+                                @TempData["UpdateMessage"]
+                            </div>
+                        }
+                    </div>
+
+                    <div class="msgbox">
+                        @if (TempData["AddMessage"] != null)
+                        {
+                            <div class="msgbox-update">
+                                <strong>
+                                    Success! Truck added successfully!
+                                </strong>
+                                @TempData["AddMessage"]
+                            </div>
+                        }
+                    </div>
+                </div>
+     
+            </div>
+        </div>
+    </div>
+
+}
+
+
+
+
+<div class="row">
+    <div class="col-md-12">
+            <table class="table table-hover newTbl">
+                <tr>
+                    <th>Transport ID</th>
+                    <th>Truck Capacity</th>
+                    <th>Highway Fee</th>
+                    <th>Driver Name</th>
+                    <th>Driver Surname</th>
+                    <th>Delete</th>
+                    <th>Update</th>
+                </tr>
+
+
+
+                <tbody>
+                    @foreach (var trck in Model)
+                    {
+
+                        <tr>
+                            <td>@trck.TransportId</td>
+                            <td>@trck.TruckCapacity</td>
+                            <td>@trck.HighwayFee</td>
+                            <td>@trck.DriverName</td>
+                            <td>@trck.DriverSurname</td>
+                            
+
+                            <td>
+                            <a href="javascript:void(0);" onclick="confirmDelete('@Url.Action("Delete", new { id = trck.TransportId })')" class="btn btn-danger">Delete</a>
+                            <td>
+                            <a href="/Trucks/Update/@trck.TransportId" class="btn btn-success">Update</a>
+
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+
+
+        <a href="/Trucks/NewTruck/" class="newAddBtn">Add New Truck</a>
+
+    </div>
+
+</div>
+
+
+<script>
+    function confirmDelete(url) {
+        if (confirm('Silmek istediğinizden emin misiniz?')) {
+            window.location.href = url;
+        }
+    }
+</script>

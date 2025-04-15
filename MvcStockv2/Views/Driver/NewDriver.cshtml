@@ -1,0 +1,53 @@
+﻿@using MvcStockv2.Models.Entity
+@model List<Driver>
+
+@{
+    ViewData["Title"] = "NewDriver";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<form  method="post">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="DriverName">Driver Name:</label>
+                        @Html.TextBox("DriverName", null, new { @class = "form-control", id = "DriverName" })
+                    </div>
+
+
+                    <div class="col-md-6">
+                        <label for="DriverSurname">Driver Surname:</label>
+                        @Html.TextBox("DriverSurname", null, new { @class = "form-control", id = "DriverSurname" })
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <button class="addBtn">Add New Driver</button>
+
+                    </div>
+                </div>
+
+                <div class="msgbox">
+                    @if (TempData["Alert Message"] != null)
+                    {
+                        <div class="msgbox-update">
+                            <strong>
+                                Success! Driver added successfully!!
+                            </strong>
+                            @TempData["Alert Message"]
+                        </div>
+                    }
+                </div>
+
+            </div>
+
+            
+        </div>
+    </div>
+            
+
+</form>

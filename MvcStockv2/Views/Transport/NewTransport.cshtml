@@ -1,0 +1,115 @@
+﻿@using MvcStock.Controllers
+@using MvcStockv2.Models.Entity
+@using MvcStock.Models.ViewModel
+@model TranspotAndStorageViewModel
+
+@{
+    ViewData["Title"] = "NewTransport";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+<form method="post">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="TransportType">Transport Type:</label>
+                        <select name="TransportId" id="TransportId" class="form-control newInput">
+                            @foreach (var item in Model.Transports)
+                            {
+                                <option value="@item.TransportId">@item.TransportType</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label for="StorageName">Storage Name:</label>
+                        <select name="StorageId" id="StorageId" class="form-control newInput">
+                            @foreach (var item in Model.Storages)
+                            {
+                                <option value="@item.StorageId">@item.StorageName</option>
+
+                            }
+                        </select>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label for="ProductName">Product Name:</label>
+                        <select name="ProductId" id="ProductId" class="form-control newInput">
+                            @foreach (var item in Model.Products)
+                            {
+                                <option value="@item.ProductId">@item.ProductName</option>
+
+                            }
+                        </select>
+                    </div>
+
+                   
+
+                    <div class="col-md-3">
+                        <label for="SenderFirmName">Sender Firm Name:</label>
+                        <select name="SenderFirmId" id="SenderFirmId" class="form-control newInput">
+                            @foreach (var item in Model.Senders)
+                            {
+                                <option value="@item.SenderFirmId">@item.SenderFirmName</option>
+
+                            }
+                        </select>
+                    </div>
+
+
+                </div>
+
+               
+                <div class="row mtop-20">
+
+                    <div class="col-md-3">
+                        <label for="ReceiverFirmName">Receiver Firm Name:</label>
+                        <select name="ReceiverFirmId" id="ReceiverFirmId" class="form-control newInput">
+                            @foreach (var item in Model.Receivers)
+                            {
+                                <option value="@item.ReceiverFirmId">@item.ReceiverFirmName</option>
+
+                            }
+                        </select>
+                    </div>
+                    
+                    <div class="col-md-3">
+                        <label for="LoadingDate">Loading Date:</label>
+                        @Html.TextBox("LoadingDate", null, new { @class = "form-control newInput", id = "LoadingDate" })
+                    </div>
+
+                    <div class="col-md-3">
+                        <label for="TransferPayment">Transfer Payment:</label>
+                        @Html.TextBox("TransferPayment", null, new { @class = "form-control newInput", id = "TransferPayment" })
+                    </div>
+                    
+                </div>
+
+
+                    <div class="row">
+                        <div class="col-md-4">
+                        <button class="addBtn">Add New Transport</button>
+
+                        </div>
+                    </div>
+
+                <div class="msgbox">
+                    @if (TempData["Alert Message"] != null)
+                    {
+                        <div class="msgbox-transport">
+                            <strong>
+                                Success! Transport added successfully!!
+                            </strong>
+                            @TempData["Alert Message"]
+                        </div>
+                    }
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</form>

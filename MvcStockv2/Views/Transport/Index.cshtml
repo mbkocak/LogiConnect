@@ -1,0 +1,181 @@
+﻿@using MvcStock.Models.ViewModel
+@model IEnumerable<TransportViewModel>
+
+
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+   
+}
+@using (Html.BeginForm("Index", "Transport", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="TransportType">Transport Type:</label>
+                        @Html.TextBox("TransportType", null, new { @class = "form-control newInput", id = "TransportType" })
+                    </div>
+                    <div class="col-md-3">
+                        <label for="ProductType">Product Type:</label>
+                        @Html.TextBox("ProductType", null, new { @class = "form-control newInput", id = "ProductType" })
+                    </div>
+                    <div class="col-md-3">
+                        <label for="ProductUnit">Product Unit:</label>
+                        @Html.TextBox("ProductUnit", null, new { @class = "form-control newInput", id = "ProductUnit" })
+                    </div>
+                    <div class="col-md-3">
+                        <label for="ProductSensivity">Product Sensivity:</label>
+                        @Html.TextBox("ProductSensivity", null, new { @class = "form-control newInput", id = "ProductSensivity" })
+                    </div>
+
+                </div>
+
+                <div class="row mtop-20">
+                    <div class="col-md-3">
+                        <label for="SenderFirmName">Sender Firm Name:</label>
+                        @Html.TextBox("SenderFirmName", null, new { @class = "form-control newInput", id = "SenderFirmName" })
+                    </div>
+
+                    <div class="col-md-3">
+                        <label for="SenderFirmLocation">Sender Firm Location:</label>
+                        @Html.TextBox("SenderFirmLocation", null, new { @class = "form-control newInput", id = "SenderFirmLocation" })
+                    </div>
+
+                    <div class="col-md-3">
+                        <label for="ReceiverFirmName">Receiver Firm Name:</label>
+                        @Html.TextBox("ReceiverFirmName", null, new { @class = "form-control newInput", id = "ReceiverFirmName" })
+                    </div>
+
+                    <div class="col-md-3">
+                        <label for="ReceiverFirmLocation">Receiver Firm Location:</label>
+                        @Html.TextBox("ReceiverFirmLocation", null, new { @class = "form-control newInput", id = "ReceiverFirmLocation" })
+                    </div>
+
+                </div>
+
+               
+                    <div class="row">
+                        <div class="col-md-4">
+                            <input type="submit" value="Search" class="newBtn" style="margin-left: 12px;" />
+
+                        </div>
+                    </div>
+
+                    <div class="msgbox">
+                        @if (TempData["DeleteMessage"] != null)
+                        {
+                            <div class="msgbox-product">
+                                <strong>Success! Transport deleted!</strong> @TempData["DeleteMessage"]
+                            </div>
+                        }
+                    </div>
+                    
+
+                    <div class="msgbox">
+                        @if (TempData["UpdateMessage"] != null)
+                        {
+                        <div class="msgbox-product">
+                                <strong>
+                                    Success! Updated successfully!
+                                </strong>
+                                @TempData["UpdateMessage"]
+                            </div>
+                        }
+                    </div>
+
+                    <div class="msgbox">
+                        @if (TempData["AddMessage"] != null)
+                        {
+                        <div class="msgbox-product">
+                                <strong>
+                                    Success! Transport added successfully!
+                                </strong>
+                                @TempData["AddMessage"]
+                            </div>
+                        }
+                    </div>
+
+            </div>
+        </div>
+    </div>
+
+    
+        
+}
+         
+  
+                <div class="row">
+                    <div class="col-md-12">
+                    <div class="tableScroll">
+                        <table class="table table-hover newTbl">
+                        <tr>
+                            <th>Transport Type</th>
+                            <th>Product Name</th>
+                            <th>Product Type</th>
+                            <th>Product Unit</th>
+                            <th>Product Sensivity</th>
+                            <th>Sender Firm Name</th>
+                            <th>Sender Firm E-mail</th>
+                            <th>Sender Firm Location</th>
+                            <th>Receiver Firm Name</th>
+                            <th>Receiver Firm Email </th>
+                            <th>Receiver Firm Location</th>
+                            <th>Loading Date</th>
+                            <th>Transfer Payment</th>
+                            <th>Delete</th>
+                            <th>Update</th>
+                        </tr>
+
+
+
+                        <tbody>
+                            @foreach (var trns in Model)
+                            {
+
+                                <tr>
+                                    <td>@trns.TransportType</td>
+                                    <td>@trns.ProductName</td>
+                                    <td>@trns.ProductType</td>
+                                    <td>@trns.ProductUnit</td>
+                                    <td>@trns.ProductSensivity</td>
+                                    <td>@trns.SenderFirmName</td>
+                                    <td>@trns.SenderFirmEmail</td>
+                                    <td>@trns.SenderFirmLocation</td>
+                                    <td>@trns.ReceiverFirmName</td>
+                                    <td>@trns.ReceiverFirmEmail</td>
+                                    <td>@trns.ReceiverFirmLocation</td>
+                                    <td>@trns.LoadingDate</td>
+                                    <td>@trns.TransferPayment</td>
+
+                                    <td>
+                                <a href="javascript:void(0);" onclick="confirmDelete('@Url.Action("Delete", new { id = trns.TransferId })')"class="btn btn-danger">Delete</a>
+                                    </td>
+                                    <td>
+                                <a href="/Transport/Update/@trns.TransferId" class="btn btn-success">Update</a>
+                                    </td>
+
+                                </tr>
+                            }
+                        </tbody>
+
+                    </table>
+                
+                    </div>
+        <a href="/Transport/NewTransport/" class="newAddBtn">Add New Transfer</a>
+
+                </div>
+             
+                </div>
+
+
+<script>
+    function confirmDelete(url) {
+        if (confirm('Silmek istediğinizden emin misiniz?')) {
+            window.location.href = url;
+        }
+    }
+</script>
+

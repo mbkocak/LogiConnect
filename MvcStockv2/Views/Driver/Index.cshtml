@@ -1,0 +1,126 @@
+﻿@using MvcStockv2.Models.Entity
+@model List<Driver>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+@using (Html.BeginForm("Index", "Driver", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <div class="row ">
+                    <div class="col-md-6">
+                        <label for="DriverName">Driver Name:</label>
+                        @Html.TextBox("DriverName", null, new { @class = "form-control newInput", id = "DriverName" })
+                    </div>
+                    <div class="col-md-6">
+                        <label for="DriverSurname">Driver Surname:</label>
+                        @Html.TextBox("DriverSurname", null, new { @class = "form-control newInput", id = "DriverSurname" })
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <input type="submit" value="Search" class="newBtn" style="margin-left: -2px;" />
+
+                    </div>
+                </div>
+
+                <div class="msgbox">
+                    @if (TempData["DeleteMessage"] != null)
+                    {
+                        <div class="msgbox-update">
+                            <strong>Success! Driver deleted!</strong> @TempData["DeleteMessage"]
+                        </div>
+                    }
+                </div>
+
+
+                <div class="msgbox">
+                    @if (TempData["UpdateMessage"] != null)
+                    {
+                        <div class="msgbox-update">
+                            <strong>
+                                Success! Updated successfully!
+                            </strong>
+                            @TempData["UpdateMessage"]
+                        </div>
+                    }
+                </div>
+
+                <div class="msgbox">
+                    @if (TempData["AddMessage"] != null)
+                    {
+                        <div class="msgbox-update">
+                            <strong>
+                                Success! Driver added successfully!
+                            </strong>
+                            @TempData["AddMessage"]
+                        </div>
+                    }
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+}
+
+
+
+    
+
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-hover newTbl">
+            <tr>
+                <th>Driver ID</th>
+                <th>Driver Name</th>
+                <th>Driver Surname</th>
+                <th>Delete</th>
+                <th>Update</th>
+
+            <tbody>
+                @foreach (var drvr in Model)
+                {
+
+                    <tr>
+                        <td>@drvr.DriverId</td>
+                        <td>@drvr.DriverName</td>
+                        <td>@drvr.DriverSurname</td>
+
+
+                        <td>
+                            <a href="javascript:void(0);" onclick="confirmDelete('@Url.Action("Delete", new { id = drvr.DriverId })')" class="btn btn-danger">Delete</a>
+                        </td>
+                            <td>
+                            <a href="/Driver/Update/@drvr.DriverId" class="btn btn-success">Update</a>
+                            </td>
+                           
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+
+        <a href="/Driver/NewDriver/" class="newAddBtn">Add New Driver</a>
+
+    </div>
+
+</div>
+
+
+<script>
+    function confirmDelete(url) {
+        if (confirm('Sürücüyü silmek istediğinize emin misiniz?')) {
+            window.location.href = url;
+        }
+    }
+</script>

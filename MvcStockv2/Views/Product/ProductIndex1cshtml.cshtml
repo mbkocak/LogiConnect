@@ -1,0 +1,102 @@
+﻿@using MvcStock.Models.ViewModel
+@model IEnumerable<ProductViewModel>
+
+    
+@{
+    ViewData["Title"] = "ProductIndex1";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+@using (Html.BeginForm("ProductIndex1", "Product", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="ProductName">Product Name:</label>
+                        @Html.TextBox("ProductName", null, new { @class = "form-control newInput", id = "ProductName" })
+                    </div>
+                    <div class="col-md-3">
+                        <label for="ProductType">Product Type:</label>
+                        @Html.TextBox("ProductType", null, new { @class = "form-control newInput", id = "ProductType" })
+                    </div>
+                    <div class="col-md-3">
+                        <label for="ProductUnit">Product Unit:</label>
+                        @Html.TextBox("ProductUnit", null, new { @class = "form-control newInput", id = "ProductUnit" })
+                    </div>
+                    <div class="col-md-3">
+                        <label for="ProductSensivity">Product Sensivity:</label>
+                        @Html.TextBox("ProductSensivity", null, new { @class = "form-control newInput", id = "ProductSensivity" })
+                    </div>
+
+                </div>
+
+                <div class="row mtop-20">
+                    <div class="col-md-3">
+                        <label for="SenderFirmName">Sender Firm Name:</label>
+                        @Html.TextBox("SenderFirmName", null, new { @class = "form-control newInput", id = "SenderFirmName" })
+                    </div>
+
+                    <div class="col-md-3">
+                        <label for="SenderFirmLocation">Sender Firm Location:</label>
+                        @Html.TextBox("SenderFirmLocation", null, new { @class = "form-control newInput", id = "SenderFirmLocation" })
+                    </div>
+
+                    <div class="col-md-3">
+                        <label for="StorageCapacity">StorageCapacity:</label>
+                        @Html.TextBox("StorageCapacity", null, new { @class = "form-control newInput", id = "StorageCapacity" })
+                    </div>
+
+                    <div class="col-md-3">
+                        <label for="StorageName">StorageName:</label>
+                        @Html.TextBox("StorageName", null, new { @class = "form-control newInput", id = "StorageName" })
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <input type="submit" value="Search" class="newBtn" style="margin-left: 12px;" />
+
+                        </div>
+                    </div>
+
+                    <div class="msgbox">
+                        @if (TempData["DeleteMessage"] != null)
+                        {
+                            <div class="msgbox-transport">
+                                <strong>Success! Transport deleted!</strong> @TempData["DeleteMessage"]
+                            </div>
+                        }
+                    </div>
+
+
+                    <div class="msgbox">
+                        @if (TempData["UpdateMessage"] != null)
+                        {
+                            <div class="msgbox-transport">
+                                <strong>
+                                    Success! Updated successfully!
+                                </strong>
+                                @TempData["UpdateMessage"]
+                            </div>
+                        }
+                    </div>
+
+                    <div class="msgbox">
+                        @if (TempData["AddMessage"] != null)
+                        {
+                            <div class="msgbox-transport">
+                                <strong>
+                                    Success! Transport added successfully!
+                                </strong>
+                                @TempData["AddMessage"]
+                            </div>
+                        }
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+}

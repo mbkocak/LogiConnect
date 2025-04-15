@@ -1,0 +1,68 @@
+﻿@using MvcStockv2.Models.Entity
+@model List<Driver>
+
+@{
+    ViewData["Title"] = "NewTruck";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+<form method="post">
+   
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="DriverId">Driver Name:</label>
+                        <select name="DriverId" id="DriverId" class="form-control newInput">
+                            @foreach (var item in Model)
+                            {
+                                <option value="@item.DriverId">@item.DriverName @item.DriverSurname</option>
+
+                            }
+                        </select>
+                    </div>
+
+
+                    <div class="col-md-4">
+                        <label for="TruckCapacity">Truck Capacity:</label>
+                        @Html.TextBox("TruckCapacity", null, new { @class = "form-control newInput", id = "TruckCapacity" })
+                    </div>
+
+
+                    <div class="col-md-4">
+                        <label for="HighwayFee">Highway Fee:</label>
+                        @Html.TextBox("HighwayFee", null, new { @class = "form-control newInput", id = "HighwayFee" })
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <button class="addBtn">Add New Truck</button>
+
+                    </div>
+                </div>
+
+                <div class="msgbox">
+                    @if (TempData["Alert Message"] != null)
+                    {
+                        <div class="msgbox-update">
+                            <strong>
+                                Success! Truck added successfully!!
+                            </strong>
+                            @TempData["Alert Message"]
+                        </div>
+                    }
+                </div>
+
+                
+            </div>
+        </div>
+    </div>
+                   
+
+</form>
+
+
+

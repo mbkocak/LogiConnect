@@ -1,0 +1,75 @@
+﻿@model List<Product>
+@using MvcStockv2.Models.Entity
+
+
+@{
+    ViewData["Title"] = "NewProduct";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<form  method="post">
+    <div class="row">
+        <div>
+            <div class="panel">
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>Product Name</label>
+                            </div>
+                            <div class="float-left">
+                                <select name="ProducId" id="ProductId" class="form-control">
+                                    @foreach (var item in Model)
+                                    {
+                                        <option value="@item.ProductName">@item.ProductName</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>Product Type</label>
+                            </div>
+                            <div class="float-left">
+                                <select name="ProductType" id="ProductType" class="form-control">
+                                    @foreach (var item in Model)
+                                    {
+                                        <option value="@item.ProductType">@item.ProductType</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-md-6">
+                        <button class="btn btn-info">Add Product</button>
+                    </div>
+
+                    <div class="msgbox">
+                        @if (TempData["Alert Message"] != null)
+                        {
+                            <div class="alert alert-success">
+                                <strong>
+                                    Success! New product added successfully!
+                                </strong>
+                                @TempData["Alert Message"]
+                            </div>
+                        }
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+</form>
+
+
