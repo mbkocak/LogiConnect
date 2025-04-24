@@ -1,0 +1,53 @@
+﻿@using MvcStock.Controllers
+@using MvcStockv2.Models.Entity
+@using MvcStock.Models.ViewModel
+@model ProductAndStorageViewModel
+
+@{
+    ViewData["Title"] = "NewProduct";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+<form method="post">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <div class="row">
+                    
+                    <div class="col-md-3">
+                        <label for="ProductName">Product Name:</label>
+                        @Html.TextBox("ProductName", null, new { @class = "form-control newInput", id = "ProductName" })
+                    </div>
+                    <div class="col-md-3">
+                        <label for="ProductType">Product Type:</label>
+                        @Html.TextBox("ProductType", null, new { @class = "form-control newInput", id = "ProductType" })
+                    </div>
+
+                    <div class="col-md-3">
+                        <label for="ProductUnit">Product Unit:</label>
+                        @Html.TextBox("ProductUnit", null, new { @class = "form-control newInput", id = "ProductUnit" })
+                    </div>
+
+                    <div class="col-md-3">
+                        <label for="ProductSensivity">Product Sensivity:</label>
+                        @Html.TextBox("ProductSensivity", null, new { @class = "form-control newInput", id = "ProductSensivity" })
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <button class="addBtn">Add New Product</button>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</form>
+

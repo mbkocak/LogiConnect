@@ -1,0 +1,138 @@
+﻿@using MvcStockv2.Models.ViewModel
+@model IEnumerable<ProductViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+@using (Html.BeginForm("Index", "Product", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="ProductName">Product Name:</label>
+                        @Html.TextBox("ProductName", null, new { @class = "form-control newInput", id = "ProductName" })
+                    </div>
+                    <div class="col-md-3">
+                        <label for="ProductType">Product Type:</label>
+                        @Html.TextBox("ProductType", null, new { @class = "form-control newInput", id = "ProductType" })
+                    </div>
+                    <div class="col-md-3">
+                        <label for="ProductUnit">Product Unit:</label>
+                        @Html.TextBox("ProductUnit", null, new { @class = "form-control newInput", id = "ProductUnit" })
+                    </div>
+
+                    <div class="col-md-3">
+                        <label for="ProductSensivity">Product Sensivity:</label>
+                        @Html.TextBox("ProductSensivity", null, new { @class = "form-control newInput", id = "ProductSensivity" })
+                    </div>
+                    
+
+                </div>
+
+                
+                    <div class="row">
+                        <div class="col-md-4">
+                            <input type="submit" value="Search" class="newBtn" style="margin-left: 12px;" />
+
+                        </div>
+                    </div>
+
+                    <div class="msgbox">
+                        @if (TempData["DeleteMessage"] != null)
+                        {
+                            <div class="msgbox-product">
+                                <strong>Success! Product deleted!</strong> @TempData["DeleteMessage"]
+                            </div>
+                        }
+                    </div>
+
+
+                    <div class="msgbox">
+                        @if (TempData["UpdateMessage"] != null)
+                        {
+                            <div class="msgbox-product">
+                                <strong>
+                                    Success! Updated successfully!
+                                </strong>
+                                @TempData["UpdateMessage"]
+                            </div>
+                        }
+                    </div>
+
+                    <div class="msgbox">
+                        @if (TempData["AddMessage"] != null)
+                        {
+                            <div class="msgbox-product">
+                                <strong>
+                                    Success! Product added successfully!
+                                </strong>
+                                @TempData["AddMessage"]
+                            </div>
+                        }
+                    </div>
+
+            </div>
+        </div>
+    </div>
+
+}
+
+<div class="row">
+    <div class="col-md-12">
+            <table class="table table-hover newTbl">
+                <tr>
+                    <th>Product Name</th>
+                    <th>Product Type</th>
+                    <th>Product Unit</th>
+                    <th>Product Sensivity</th>
+                    <th>Delete</th>
+                    <th>Update</th>
+                </tr>
+
+
+
+                <tbody>
+                    @foreach (var prdct in Model)
+                    {
+
+                        <tr>
+                            
+                            <td>@prdct.ProductName</td>
+                            <td>@prdct.ProductType</td>
+                            <td>@prdct.ProductUnit</td>
+                            <td>@prdct.ProductSensivity</td>
+                     
+                            <td>
+                                <a href="javascript:void(0);" onclick="confirmDelete('@Url.Action("Delete", new { id = prdct.ProductId })')" class="btn btn-danger">Delete</a>
+                            </td>
+                            <td>
+                                <a href="/Product/Update/@prdct.ProductId" class="btn btn-success">Update</a>
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+
+       
+        <a href="/Product/NewProduct/" class="newAddBtn">Add New Product</a>
+
+    </div>
+
+</div>
+
+
+<script>
+    function confirmDelete(url) {
+        if (confirm('Silmek istediğinizden emin misiniz?')) {
+            window.location.href = url;
+        }
+    }
+</script>
+
+
+

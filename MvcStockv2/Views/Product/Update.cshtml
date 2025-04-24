@@ -1,0 +1,56 @@
+﻿@using MvcStockv2.Models.Entity
+@using MvcStock.Controllers
+@using MvcStock.Models.ViewModel
+@model ProductAndStorageViewModel
+
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+@using (Html.BeginForm("ApplyUpdate", "Product", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <div class="row">
+                    @Html.HiddenFor(m => m.ProductId)
+
+                    <div class="col-md-3">
+                        <label for="ProductName">Product Name:</label>
+                        @Html.TextBoxFor(m => m.ProductName, new { @class = "form-control", id = "ProductName" })
+                    </div>
+
+                    <div class="col-md-3">
+                        <label for="ProductType">Product Type:</label>
+                        @Html.TextBoxFor(m => m.ProductType, new { @class = "form-control", id = "ProductType" })
+
+                    </div>
+
+                    <div class="col-md-3">
+                        <label for="ProducUnit">Product Unit:</label>
+                        @Html.TextBoxFor(m => m.ProductUnit, new { @class = "form-control", id = "ProducUnit" })
+
+                    </div>
+
+                    <div class="col-md-3">
+                        <label for="ProductSensivity">Product Sensivity:</label>
+                        @Html.TextBoxFor(m => m.ProductSensivity, new { @class = "form-control", id = "ProductSensivity" })
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <input type="submit" value="Update" class="btn btn-success" style="margin-top: 20px;" />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+}
+
+
